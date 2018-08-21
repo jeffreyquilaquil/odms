@@ -1,0 +1,63 @@
+html, body{
+    height:100%;
+}
+
+.container{
+    height:100%;
+    width:100%;
+}
+.error{
+  color:red !important;
+}
+
+/* Custom Card CSS */
+.card .card-buttons{
+    padding: 0px 3px 0px 3px;
+    border: 1px solid rgba(87, 87, 87, 0.4);
+    background: #79797945;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.sub-menu li{
+    text-decoration-color: grey;
+}
+
+.nav{
+  margin-bottom:-13px;
+}
+.nav a:hover{
+  text-decoration:none;
+}
+
+.create-tab{
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
+
+.header-ID{
+  width:20px;
+}
+
+.txt-validate-error {
+  color: #495057;
+  background-color: #dc3546aa;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/*Custom Button CSS*/
+.btn-save{
+  background-color:white;
+  border-color:#117a8b;
+  font:#117a8b;
+}
+
+/* Custom CSS for navigations */
+.active-tab *{
+  color:white
+}
+.active-tab:hover *{
+  color:white !important;
+}
