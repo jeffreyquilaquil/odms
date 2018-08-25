@@ -115,7 +115,8 @@ class Staff extends My_Controller{
         $this->load->view('includes/template', $data);
     }
 
-    public function userRegister(){
+    public function userRegister($fallBack = ''){
+        $data = $fallBack;
         $data['options']['office'] = $this->dbmodel->getResultArray('tbloffice','*');
         $data['options']['designation'] = $this->dbmodel->getResultArray('tbldesignation','*');
         $data['usernames'] = $this->dbmodel->getSingleColumnResult('tblaccount','username');
@@ -128,19 +129,68 @@ class Staff extends My_Controller{
 
     }
 
-    public function userSave(){
-      $data['firstname'] = $this->input->post('firstname', TRUE);
-      $data['middlename'] = $this->input->post('middlename', TRUE);
-      $data['lastname'] = $this->input->post('lastname', TRUE);
-      $data['username'] = $this->input->post('username', TRUE);
-      $data['password'] = md5('jnqEVSUCCdefault');
+    public function user_save(){
+      $upload_verify = [TRUE, TRUE];
+      $data['firstname'] = $this->input->post('fname', TRUE);
+      $data['middlename'] = $this->input->post('mi', TRUE);
+      $data['lastname'] = $this->input->post('lname', TRUE);
+      $data['username'] = $this->input->post('uname', TRUE);
+      $data['password'] = md5('jnqEVSUCC');
       $data['office'] = $this->input->post('office');
       $data['designation'] = $this->input->post('designation');
-      $data['access'] = $this->input->post('accessArr');
+      $data['check_access'] = $this->input->post('permission');
       $data['created'] = date('Y-m-d');
+      $uname_arr = $this->dbmodel->getSingleColumnResult('tblaccount','username');
 
-      #$this->dbmodel->insertQuery('tblaccount', $data);
-      header('Location:'.$this->config->base_url().'users');
+      if( in_array($data['username'], $uname_arr) > 0 ){
+        $data['error']['username'] = 'Username already registered.';
+        $upload_verify[0] = FALSE;
+      }
+
+      if( count($data['check_access']) < 1 ){
+        $data['error']['check_access'] = 'Please select atleast one.';
+        $upload_verify[1] = FALSE;
+      }
+
+      if( $upload_verify[0] == TRUE && $upload_verify[1] == TRUE ){
+        $config['upload_path'] = './uploads/signatures/';
+        $config['allowed_types'] = 'png';
+        $config['file_name'] = $data['username'];
+
+        $this->load->library('upload',$config);
+        if( ! $this->upload->do_upload('signature')){
+          $data['error']['signature'] = 'Filetype not allowed. Use PNG Images.';
+          $this->userRegister($data);
+        }else{
+          mkdir('./uploads/profiles/'.$data['username']);
+          // Remove and rename indexes not found in tblaccount columns
+          $data['access'] = implode(',', $data['check_access']);
+          unset($data['error']);
+          unset($data['check_access']);
+          $this->dbmodel->insertQuery('tblaccount', $data);
+
+          header('Location:'.$this->config->base_url().'users');
+        }
+      }else{
+        $this->userRegister($data);
+      }
+
+      // $config['upload_path'] = './uploads/signatures/';
+      // $config['allowed_types'] = 'png';
+      // $config['file_name'] = $row['username'];
+      //
+      // $this->load->library('upload',$config);
+      //
+      // if( ! $this->upload->do_upload('signature')){
+      //   $error = array('error' => $this->upload->display_errors());
+      //   var_dump($error);
+      //   // $this->load->view('includes/template', $error);
+      // }else{
+      //   // header('Location:'.$this->config->base_url().'users');
+      // }
+
+      #$this->dbmodel->insertQuery('tblaccount', $row);
+      #header('Location:'.$this->config->base_url().'users');
     }
 
     public function addDocument(){
