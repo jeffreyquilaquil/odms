@@ -53,6 +53,9 @@
         $(this).addClass('active');
         var id = $(this).attr('id');
         $('.card-body > .div-'+id).css('display','block');
+    })
 
+    $(document).on('click','.edit', function(){
+        window.location = $('#base_url').val()+'staff/user_edit/'+$(this).data('row');
     })
 </script>

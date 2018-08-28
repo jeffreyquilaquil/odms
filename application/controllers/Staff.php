@@ -174,23 +174,17 @@ class Staff extends My_Controller{
       }else{
         $this->userRegister($data);
       }
+    }
 
-      // $config['upload_path'] = './uploads/signatures/';
-      // $config['allowed_types'] = 'png';
-      // $config['file_name'] = $row['username'];
-      //
-      // $this->load->library('upload',$config);
-      //
-      // if( ! $this->upload->do_upload('signature')){
-      //   $error = array('error' => $this->upload->display_errors());
-      //   var_dump($error);
-      //   // $this->load->view('includes/template', $error);
-      // }else{
-      //   // header('Location:'.$this->config->base_url().'users');
-      // }
+    public function user_edit($id){
+      $data['access'] = ($this->access->accessFull == TRUE OR $this->access->accessUsers== TRUE ? TRUE : FALSE);
+      $data['tab'] = 'users';
+      $data['content'] = 'user_edit';
+      $data['row'] = $this->dbmodel->getSingleResult('tblaccount', '*','staffID = '.$id);
+      $data['office_arr'] = $this->dbmodel->getResultArray('tbloffice','*');
+      $data['designation_arr'] = $this->dbmodel->getResultArray('tblDesignation', '*');
 
-      #$this->dbmodel->insertQuery('tblaccount', $row);
-      #header('Location:'.$this->config->base_url().'users');
+      $this->load->view('includes/template', $data);
     }
 
     public function addDocument(){
