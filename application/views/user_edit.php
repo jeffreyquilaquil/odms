@@ -7,10 +7,12 @@ extract($row);
   </div>
   <div class="card-body">
     <?= form_open_multipart('staff/user_save'); ?>
+    <input type="hidden" name="user_edit" value="yes">
     <table class="table">
       <tr>
         <td class="td">
           <label for="lname">Lastname*</label>
+
           <input type="text" name="lname" value="<?= $lastname ?>" class="form-control" required>
         </td>
         <td class="td">
@@ -62,12 +64,27 @@ extract($row);
               <?php
                 echo "<tr>";
                 $counter = 0;
-                // foreach($permission AS $key => $value){
-                  // var_dump($access);
-                // }
+                foreach($access_arr AS $key => $value){
+                  $checked = ( in_array($value, $access) ? 'checked' : '');
+                  echo '<td>
+                    <input type="checkbox" class="chkbox" value="'.$value.'" name="permission[]" '.$checked.'>'.ucfirst($value).'
+                  </td>';
+
+                  $counter++;
+                  if($counter == 2){
+                    echo "</tr><tr>";
+                    $counter = 0;
+                  }
+                }
+                echo "</tr>";
               ?>
             </table>
           </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <button type="submit" class="btn btn-save pull-right" name="button"></button>
         </td>
       </tr>
     </table>

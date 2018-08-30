@@ -181,8 +181,10 @@ class Staff extends My_Controller{
       $data['tab'] = 'users';
       $data['content'] = 'user_edit';
       $data['row'] = $this->dbmodel->getSingleResult('tblaccount', '*','staffID = '.$id);
+      $data['row']['access'] = explode(',',$data['row']['access']);
       $data['office_arr'] = $this->dbmodel->getResultArray('tbloffice','*');
       $data['designation_arr'] = $this->dbmodel->getResultArray('tblDesignation', '*');
+      $data['access_arr'] = $this->dbmodel->getSingleColumnResult('tblaccess','access');
 
       $this->load->view('includes/template', $data);
     }
