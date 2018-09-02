@@ -70,7 +70,8 @@ class Databasemodel extends CI_Model {
         return $query->result();
     }
 
-    function updateQuery($table, $where = array(), $data = array()){
+    function updateQuery($table, $where = array(), $data = array(), $trace=FALSE){
+      var_dump($data);
         $this->db->where($where);
         $this->db->update($table, $data);
     }

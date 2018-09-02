@@ -156,22 +156,36 @@ class Staff extends My_Controller{
         $config['upload_path'] = './uploads/signatures/';
         $config['allowed_types'] = 'png';
         $config['file_name'] = $data['username'];
-
         $this->load->library('upload',$config);
         if( ! $this->upload->do_upload('signature')){
           $data['error']['signature'] = 'Filetype not allowed. Use PNG Images.';
-          $this->userRegister($data);
+          if($this->input->post('user_edit') === NULL)
+            $this->userRegister($data);
+          else
+            goto userSave;
         }else{
-          mkdir('./uploads/profiles/'.$data['username']);
+
           // Remove and rename indexes not found in tblaccount columns
+          userSave:
+
           $data['access'] = implode(',', $data['check_access']);
           unset($data['error']);
           unset($data['check_access']);
-          $this->dbmodel->insertQuery('tblaccount', $data);
+          if($this->input->post('user_edit') !== null){
+            unset($data['password']);
+            unset($data['username']);
+            // 'user_edit element contains the ID of the user'
+            $id = ['staffID' =>$this->input->post('user_edit')];
+            $this->dbmodel->updateQuery('tblaccount',$id,$data);
+          }else{
+            mkdir('./uploads/profiles/'.$data['username']);
+            $this->dbmodel->insertQuery('tblaccount', $data);
+          }
 
           header('Location:'.$this->config->base_url().'users');
         }
       }else{
+        // Go back to userRegister form with the former
         $this->userRegister($data);
       }
     }

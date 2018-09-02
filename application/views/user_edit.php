@@ -7,7 +7,7 @@ extract($row);
   </div>
   <div class="card-body">
     <?= form_open_multipart('staff/user_save'); ?>
-    <input type="hidden" name="user_edit" value="yes">
+    <input type="hidden" name="user_edit" value="<?= $staffID ?>">
     <table class="table">
       <tr>
         <td class="td">
@@ -84,7 +84,7 @@ extract($row);
       </tr>
       <tr>
         <td colspan="4">
-          <button type="submit" class="btn btn-save pull-right" name="button"></button>
+          <button type="submit" class="btn btn-save pull-right" name="button">Save</button>
         </td>
       </tr>
     </table>
