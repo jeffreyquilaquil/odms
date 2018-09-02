@@ -13,7 +13,7 @@ class Textmodel extends CI_Model{
             'edit' => ['warning', 'edit', 'Modify'],
             'delete' => ['danger', 'trash', 'Delete'],
             'disable' => ['danger', 'ban', 'Disable'],
-            'enable' => ['info', 'ban', 'Enable'],
+            'enable' => ['info', 'check', 'Enable'],
             'view' => ['primary', 'eye', 'View'],
         ];
 
@@ -53,7 +53,7 @@ class Textmodel extends CI_Model{
                         }
                     }
                 $table .= '</tr>';
-            }            
+            }
         }else{
             $table .= '<tr><td colspan="30" style="text-align:center">No data available</td></tr>';
         }

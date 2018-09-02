@@ -203,6 +203,11 @@ class Staff extends My_Controller{
       $this->load->view('includes/template', $data);
     }
 
+    public function user_change_type($status, $id){
+      $this->dbmodel->updateQuery('tblaccount',['staffID'=>$id],['status'=>$type]);
+      header("Location:".$this->config->base_url().'/users');
+    }
+
     public function addDocument(){
         $data['content'] = 'addDocument';
         $data['tab'] = 'document';
