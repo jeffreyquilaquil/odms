@@ -6,19 +6,9 @@ class Staff extends My_Controller{
         parent::__construct();
     }
 
-    public function index($type = 1){
-        $data['content'] = '';
-        if($this->user == true){
-            $data['content'] = 'documents';
-            $data['tab'] = 'documents';
-            $data['record'] = $this->dbmodel->getResultArray('tblFiles f ','f.fileID as ID,  f.title as filename, CONCAT(a.firstname," ",a.lastname) AS author', 'f.authorID  = '.$this->user->staffID, 'LEFT JOIN tblaccount a ON a.staffID = f.authorID');
-        }
-
-        $this->load->view('includes/template', $data);
-
-        // $type = ($type == 1 ? $type : 0);
-        // $data['results'] = $this->dbmodel->getResultArray('tblfiles','fileId, title, authorID', 'status = '.$type.' AND ');
-        // print_r($data['results']);
+    public function index(){
+       // header("Location:".$this->config->base_url().'/documents/MyDocuments');
+     // $this->config->base_url().'Document/Mydocuments()';
     }
 
     public function login(){
@@ -216,9 +206,18 @@ class Staff extends My_Controller{
 
         $this->load->view('includes/template', $data);
     }
+    //
+
+//
+
 
     public function documents($type = 1){
+      $data['type'] = $type;
+      $data['content'] = 'documents';
+      $data['tab'] = 'documents';
+      $data['row'] = $this->dbmodel->getResultArray('tblFiles f ','f.fileID as ID,  f.title as filename, CONCAT(a.firstname," ",a.lastname) AS author', 'f.authorID  = '.$this->user->staffID.' AND f.status = '.$type, 'LEFT JOIN tblaccount a ON a.staffID = f.authorID');
 
+      $this->load->view('includes/template', $data);
     }
 
     public function settings($type=0, $id=0, $create=0){

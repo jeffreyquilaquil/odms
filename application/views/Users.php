@@ -17,7 +17,7 @@
           </a>
         </ul>
         <ul class="nav nav-tabs create-tab" style="top:7px;">
-          <a href="<?= $this->config->base_url().'staff/userRegister/'?>">
+          <a href="<?= $this->config->base_url()?>staff/userRegister/">
             <li class="nav-link active">
                 Create
             </li>
@@ -79,4 +79,6 @@
         window.location = $('#base_url').val()+'staff/user_change_type/1/'+$(this).data('row');
       }
     });
+
+    $('.header-action').css('width','200px');
 </script>
