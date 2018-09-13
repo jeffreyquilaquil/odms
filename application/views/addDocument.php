@@ -6,16 +6,31 @@
     <div class="card-body">
         <table class="table">
             <tr>
-                <td>
+                <td colspan="3">
                     <label for="file">Select PDF File</label>
                     <input type="file" name="file" class="form-control" placeholder="file">
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label for="users">Select Signatories</label>
-                    <?= $this->textM->autocomplete($id, $names); ?>
-                </td>
+              <td>Order of Signatures:</td>
+              <td>
+                <input type="radio" name="order" value="1" checked>Sequential
+              </td>
+              <td>
+                <input type="radio" name="order" value="2">Not Sequential
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <div class="" id="signature_holder">
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3" style="border-top:none">
+                <label for="signatories">Select Signatories</label>
+                <?= $this->textM->autoComplete($users); ?>
+              </td>
             </tr>
         </table>
     </div>
@@ -24,7 +39,7 @@
 <script type="text/javascript" src="<?= $this->config->base_url() ?>js/notify.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-      
+
         $("input:file").change(function(){
             var file = $(this).val();
             var fileType = file.substr( file.lastIndexOf('.')).toLowerCase();
@@ -33,38 +48,6 @@
                 $(this).val('');
             }
         })
-
-        var user_list = '<?= $names; ?>';
-        console.log(user_list);
-        $( function() {
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#signatories" ).autocomplete({
-      source: availableTags
-    });
-  } );
     });
 
 

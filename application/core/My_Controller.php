@@ -17,11 +17,11 @@ class My_Controller extends CI_Controller{
         $this->user = $this->getLoggedUser();
         $this->access = $this->getUserAccess();
         $this->load->driver('cache', ['adapter' => 'file']);
-
     }
 
     public function getLoggedUser(){
         $uName = '';
+
         if(isset($_SESSION['u'])) $uName = $_SESSION['u'];
 
         if(!empty($uName)){

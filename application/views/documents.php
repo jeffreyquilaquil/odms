@@ -13,7 +13,7 @@
         </a>
       </ul>
       <ul class="nav nav-tabs create-tab" style="top:12px;">
-        <a href="<?= $this->config->base_url() ?>document/documentCreate">
+        <a href="<?= $this->config->base_url() ?>document/create">
           <li class="nav-link active">
             Create
           </li>

@@ -7,11 +7,26 @@ class Document extends My_Controller{
   }
 
   public function index($type = 1){
-    $data['type'] = $type;
-    $data['content'] = 'documents';
-    $data['tab'] = 'documents';
-    $data['row'] = $this->dbmodel->getResultArray('tblFiles f ','f.fileID as ID,  f.title as filename, CONCAT(a.firstname," ",a.lastname) AS author', 'f.authorID  = '.$this->user->staffID.' AND f.status = '.$type, 'LEFT JOIN tblaccount a ON a.staffID = f.authorID');
+    $data['content'] = '';
+    if($this->user == true){
+      $data['type'] = $type;
+      $data['content'] = 'documents';
+      $data['tab'] = 'documents';
+      $data['row'] = $this->dbmodel->getResultArray('tblFiles f ','f.fileID as ID,  f.title as filename, CONCAT(a.firstname," ",a.lastname) AS author', 'f.authorID  = '.$this->user->staffID.' AND f.status = '.$type, 'LEFT JOIN tblaccount a ON a.staffID = f.authorID');
 
+    }
+    $this->load->view('includes/template', $data);
+  }
+
+  public function create(){
+    $data['content'] = 'addDocument';
+    $data['tab'] = 'documents';
+    $result = $this->dbmodel->getResultArray('tblaccount','staffID, CONCAT(firstname," ",middlename,". ",lastname) AS "name"');
+    $data['users'] = array();
+    foreach($result as $key => $value){
+      array_push($data['users'], [$value['staffID'],$value['name']]);
+    }
+    
     $this->load->view('includes/template', $data);
   }
 }

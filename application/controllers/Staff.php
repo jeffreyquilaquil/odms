@@ -7,7 +7,7 @@ class Staff extends My_Controller{
     }
 
     public function index(){
-       // header("Location:".$this->config->base_url().'/documents/MyDocuments');
+     // header("Location:".$this->config->base_url().'/documents/MyDocuments');
      // $this->config->base_url().'Document/Mydocuments()';
     }
 

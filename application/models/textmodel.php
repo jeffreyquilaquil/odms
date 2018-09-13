@@ -63,18 +63,37 @@ class Textmodel extends CI_Model{
         echo $table;
     }
 
-    public function autoComplete(array $id, array $value){
-        // Fetch the keys of the array
-        $index = array_keys($value[0]);
 
-        $t = '<input type="text" class="form-control autoSelect">';
-        $t .= '<div class="hidden autoselectDiv">';
-        foreach($id AS $key => $val){
-            var_dump($value[$key]);
-            #$t .= '<span class="autoSelectSpan" data-id="'.$val.'">'.$value[$val][ $index[0]].'</span>';
+    public function autoComplete(array $data){
+        // Give each values to own array
+        $key = array();
+        $val = array();
+        foreach($data as $element){
+          array_push($key, $element[0]);
+          array_push($val, $element[1]);
         }
-        $t .= '</span>';
-        return $t;
+
+        // Create Javascript inside php function
+        // What the F***
+        $j_script = '
+          <input type="text" name="autoComplete" id="autoComplete" class="form-control">
+
+          <script type="text/javascript">
+          var val = '.json_encode($val).';
+          var key = '.json_encode($key).';
+
+
+        </script>';
+        return $j_script;
+
+        // $t = '<input type="text" class="form-control autoSelect">';
+        // $t .= '<div class="hidden autoselectDiv">';
+        // foreach($id AS $key => $val){
+        //     var_dump($value[$key]);
+        //     #$t .= '<span class="autoSelectSpan" data-id="'.$val.'">'.$value[$val][ $index[0]].'</span>';
+        // }
+        // $t .= '</span>';
+        // return $t;
     }
 }
 
