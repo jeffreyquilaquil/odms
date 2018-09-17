@@ -22,6 +22,7 @@
   <?php
     // Initial load jquery
     echo '<script src="'.$this->config->base_url().'vendor/jquery/jquery-3.3.1.min.js"></script>';
+    echo '<script src="'.$this->config->base_url().'js/main.script.js"></script>';
     // echo '<script src="'.$this->config->base_url().'vendor/validate/validate.js"></script>';
     // echo '<script src="'.$this->config->base_url().'vendor/validate/additional-methods.js">';
   ?>
