@@ -1,31 +1,25 @@
-$(document).ready(function(){
-
-  // $('#txt_autoComplete').keydown(function(){
-  //   var value = $(this).val();
-  //   // Loop for in the array
-  //   val_arr.foreach(function(e, i){
-  //     if(e.match(/value\w+/g)){
-  //       console.log(i);
-  //     }
-  //   });
-  // })
-
-
-});
+var matchBox = document.getElementById('ul_matchBox');
 
 function autoComplete(){
-  console.log('clear');
+  // console.log(matchBox);
+  matchBox.innerHTML = "";
   val_arr.forEach(displayMatch);
 }
 
 function displayMatch(elem, index){
-
   var value = document.getElementById('txt_autoComplete').value;
   // if(elem.match(/value\w+/g)){
-  var regex = new RegExp(value, "g");
+  var regex = new RegExp(value, "gi");
   var match = elem.match(regex);
   if(match != null && match.length == 1){
-    console.log(elem);
+    var li = document.createElement("li");
+    li.value = key_arr[index];
+    li.className = 'list-group-item autoComplete-list';
+    let textNode = document.createTextNode(val_arr[index]);
+    li.addEventListener("click", function(){
+      console.log("FUCK");
+    })
+    li.appendChild(textNode);
+    matchBox.appendChild(li);
   }
-
 }

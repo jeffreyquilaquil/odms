@@ -61,3 +61,11 @@ html, body{
 .active-tab:hover *{
   color:white !important;
 }
+
+.list-group-item:hover{
+  z-index: 2;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+}

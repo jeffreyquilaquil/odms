@@ -36,19 +36,18 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<?= $this->config->base_url() ?>js/notify.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-
-        $("input:file").change(function(){
-            var file = $(this).val();
-            var fileType = file.substr( file.lastIndexOf('.')).toLowerCase();
-            if(fileType != '.pdf'){
-                $.notify('Please only attach PDF Files', 'warn');
-                $(this).val('');
-            }
-        })
-    });
+    // $(document).ready(function(){
+    //
+    //     $("input:file").change(function(){
+    //         var file = $(this).val();
+    //         var fileType = file.substr( file.lastIndexOf('.')).toLowerCase();
+    //         if(fileType != '.pdf'){
+    //             $.notify('Please only attach PDF Files', 'warn');
+    //             $(this).val('');
+    //         }
+    //     })
+    // });
 
 
 </script>

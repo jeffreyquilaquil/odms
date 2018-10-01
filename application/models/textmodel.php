@@ -77,8 +77,8 @@ class Textmodel extends CI_Model{
         // What the F***
         $j_script = '
           <div class=""displaySelected"></div>
-          <input type="text" name="autoComplete" id="txt_autoComplete" class="form-control" onkeydown="autoComplete()">
-          <div class="displayMatch"></div>
+          <input type="text" name="autoComplete" id="txt_autoComplete" class="form-control" onkeyup="autoComplete()">
+          <ul id="ul_matchBox" class="list-group"></ul>
 
           <script type="text/javascript">
           var val_arr = '.json_encode($val).';
