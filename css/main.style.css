@@ -69,3 +69,13 @@ html, body{
   border-color: #007bff;
   cursor: pointer;
 }
+
+span.selected{
+  border: 1px solid #007bff;
+  padding: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 5px;
+  display: inline;
+  margin-right:5px;
+}
