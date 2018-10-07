@@ -75,7 +75,8 @@ class Textmodel extends CI_Model{
 
         // Create Javascript inside php function
         // What the F***
-        $j_script = '
+        $template = '
+        	<input id="autoComplete_val" style="display:none">
           <div class="displaySelected"></div>
           <input type="text" name="autoComplete" id="txt_autoComplete" class="form-control" onkeyup="autoComplete()" style="margin-top:10px">
           <ul id="ul_matchBox" class="list-group"></ul>
@@ -84,7 +85,7 @@ class Textmodel extends CI_Model{
           var val_arr = '.json_encode($val).';
           var key_arr = '.json_encode($key).';
         </script>';
-        return $j_script;
+        return $template;
 
         // $t = '<input type="text" class="form-control autoSelect">';
         // $t .= '<div class="hidden autoselectDiv">';

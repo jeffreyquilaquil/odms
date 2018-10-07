@@ -4,10 +4,11 @@
         New Document
     </div>
     <div class="card-body">
+      <?= form_open_multipart('document/document_save'); ?>
         <table class="table">
             <tr>
                 <td colspan="3">
-                    <label for="file">Select PDF File</label>
+                    <label for="file" required>Select PDF File</label>
                     <input type="file" name="file" class="form-control" placeholder="file">
                 </td>
             </tr>
@@ -32,7 +33,13 @@
                 <?= $this->textM->autoComplete($users); ?>
               </td>
             </tr>
+            <tr>
+              <td colspan="3">
+                <button type="submit" class="btn btn-save pull-right" name="button">Save</button>
+              </td>
+            </tr>
         </table>
+      </form>
     </div>
 </div>
 

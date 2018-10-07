@@ -4,7 +4,7 @@ $(document).ready(function(){
   $(document).on('click','.autoComplete-list',function(){
     let val = $(this).val();
     let text = $(this).text();
-    let span = '<span class="selected" name="selected[]" value="'+val+'">'+text+' <i class="fa fa-window-close returnToList" style="color:red;cursor:pointer"></i> </span>';
+    let span = '<span class="selected" name="selected[]" data-value="'+val+'">'+text+' <i class="fa fa-window-close returnToList" style="color:red;cursor:pointer"></i> </span>';
     $('.displaySelected').append(span);
 
     // Clear matchbox and autoComplete input box
@@ -14,17 +14,25 @@ $(document).ready(function(){
     // Remove list from
     let index = $(this).data('index');
     val_arr.splice(index, 1);
+    key_arr.splice(index, 1);
+
+    selected_arr.push(val);
+    $('#autoComplete_val').val( selected_arr.join(''));
   });
 
   $(document).on('click','.returnToList', function(){
     let parent = $(this).parent();
     val_arr.push( parent.text());
-    key_arr.push( parent.val());
+    key_arr.push( parent.data('value'));
+    selected_arr.splice( selected_arr.indexOf(parent.data('value')), 1);
     parent.remove();
+
+    $('#autoComplete_val').val( selected_arr.join(''));
   });
 
 });
 
+var selected_arr = [];
 var matchBox = document.getElementById('ul_matchBox');
 
 function autoComplete(){
