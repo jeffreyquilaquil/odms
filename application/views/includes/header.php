@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item <?= ($tab=='documents'?'active-tab':'') ?>" data-toggle="tooltip" data-placement="right" title="Documents">
-          <a class="nav-link" href="<?= $this->config->base_url(); ?>document/MyDocuments">
+          <a class="nav-link" href="<?= $this->config->base_url(); ?>document/index">
             <i class="fa fa-fw fa-file"></i>
             <span class="nav-link-text">My Documents</span>
           </a>
