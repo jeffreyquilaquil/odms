@@ -1,12 +1,12 @@
 <div class="card">
     <div class="card-header">
       <ul class="nav nav-tabs">
-        <a href="<?= $this->config->base_url() ?>document/MyDocuments/1">
+        <a href="<?= $this->config->base_url() ?>document/index/1">
           <li class="nav-link <?= ($type == 1 ? 'active' : '') ?>">
             Active
           </li>
         </a>
-        <a href="<?= $this->config->base_url() ?>document/MyDocuments/0">
+        <a href="<?= $this->config->base_url() ?>document/index/0">
           <li class="nav-link <?= ($type == 0 ? 'active' : '') ?>">
             Inactive
           </li>

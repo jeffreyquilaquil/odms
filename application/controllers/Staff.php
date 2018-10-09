@@ -108,7 +108,8 @@ class Staff extends My_Controller{
     public function userRegister($fallBack = ''){
         $data = $fallBack;
         $data['tab'] = 'users';
-        $data['content'] = 'userRegistration';        $data['options']['office'] = $this->dbmodel->getResultArray('tbloffice','*');
+        $data['content'] = 'userRegistration';
+        $data['options']['office'] = $this->dbmodel->getResultArray('tbloffice','*');
         $data['options']['designation'] = $this->dbmodel->getResultArray('tbldesignation','*');
         $data['usernames'] = $this->dbmodel->getSingleColumnResult('tblaccount','username');
         $data['permission'] = $this->dbmodel->getSingleColumnResult('tblaccess','access');

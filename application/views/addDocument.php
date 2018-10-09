@@ -4,12 +4,13 @@
         New Document
     </div>
     <div class="card-body">
-      <?= form_open_multipart('document/document_save'); ?>
+      <?= form_open_multipart('document/save'); ?>
         <table class="table">
             <tr>
                 <td colspan="3">
                     <label for="file" required>Select PDF File</label>
-                    <input type="file" name="file" class="form-control" placeholder="file">
+                    <i><span class="error"><?= (isset($error['file']) ? $error['file'] : '') ?></span></i>
+                    <input type="file" name="file" class="form-control" placeholder="file" required>
                 </td>
             </tr>
             <tr>
@@ -30,6 +31,7 @@
             <tr>
               <td colspan="3" style="border-top:none">
                 <label for="signatories">Select Signatories</label>
+                <i><span class="error"><?= (isset($error['select']) ? $error['select'] : '') ?></span></i>
                 <?= $this->textM->autoComplete($users); ?>
               </td>
             </tr>

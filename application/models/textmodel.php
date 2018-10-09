@@ -76,9 +76,9 @@ class Textmodel extends CI_Model{
         // Create Javascript inside php function
         // What the F***
         $template = '
-        	<input id="autoComplete_val" style="display:none">
+        	<input id="autoComplete_val" name="autocomplete" style="display:none">
           <div class="displaySelected"></div>
-          <input type="text" name="autoComplete" id="txt_autoComplete" class="form-control" onkeyup="autoComplete()" style="margin-top:10px">
+          <input type="text" name="autoComplete" id="txt_autoComplete" class="form-control" onkeyup="autoCompleteList()" style="margin-top:10px">
           <ul id="ul_matchBox" class="list-group"></ul>
 
           <script type="text/javascript">

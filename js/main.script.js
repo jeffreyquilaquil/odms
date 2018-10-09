@@ -35,7 +35,7 @@ $(document).ready(function(){
 var selected_arr = [];
 var matchBox = document.getElementById('ul_matchBox');
 
-function autoComplete(){
+function autoCompleteList(){
   // console.log(matchBox);
   matchBox.innerHTML = "";
   val_arr.forEach(displayMatch);
