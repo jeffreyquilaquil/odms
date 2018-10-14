@@ -34,10 +34,10 @@ class Document extends My_Controller{
   public function save(){
     $upload_verify = TRUE;
     $data['error'] = NULL;
-    $data1['order'] = $this->input->post('order', TRUE);
-    $data1['autocomplete'] = $this->input->post('autocomplete', TRUE);
+    $data['sign_order'] = $this->input->post('order', TRUE);
+    $signatories = explode(',', $this->input->post('signatories', TRUE));
 
-    if($data1['autocomplete'] == ''){
+    if($signatories == '' OR $signatories == NULL){
       $data['error']['select'] = 'Please select atleast one recepient.';
       $upload_verify = FALSE;
     }
@@ -49,7 +49,6 @@ class Document extends My_Controller{
       // $config['file_name'] =
 
       $this->load->library('upload', $config);
-      print_r($config);
       if( ! $this->upload->do_upload('file')){
         $data['error']['file'] = 'Filetype not allowed. Use PDF only.';
       }else{
@@ -58,7 +57,15 @@ class Document extends My_Controller{
         $data['size'] = $this->upload->data('file_size');
         $data['authorID'] = $this->user->staffID;
 
-        $this->dbmodel->insertQuery('tblfiles', $data);
+        $fileID = $this->dbmodel->insertQuery('tblfiles', $data);
+
+        $data1['fileID'] = 1;
+        // $data1['fileID'] = $fileID;
+        foreach($signatories AS $key => $val){
+          $data1['signatory'] = $val;
+          $this->dbmodel->insertQuery('tblsignatory', $data1);
+        }
+
         header('location:'.$this->config->base_url().'document/index');
       }
     }

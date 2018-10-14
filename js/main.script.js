@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  // Var initialization
 
   // Add selected list into displaySelected div
   $(document).on('click','.autoComplete-list',function(){
@@ -17,7 +18,7 @@ $(document).ready(function(){
     key_arr.splice(index, 1);
 
     selected_arr.push(val);
-    $('#autoComplete_val').val( selected_arr.join(''));
+    $('#autoComplete_val').val( selected_arr.join(','));
   });
 
   $(document).on('click','.returnToList', function(){
@@ -27,11 +28,12 @@ $(document).ready(function(){
     selected_arr.splice( selected_arr.indexOf(parent.data('value')), 1);
     parent.remove();
 
-    $('#autoComplete_val').val( selected_arr.join(''));
+    $('#autoComplete_val').val( selected_arr.join(','));
   });
 
 });
 
+var value = "";
 var selected_arr = [];
 var matchBox = document.getElementById('ul_matchBox');
 
@@ -39,10 +41,10 @@ function autoCompleteList(){
   // console.log(matchBox);
   matchBox.innerHTML = "";
   val_arr.forEach(displayMatch);
+  value = document.getElementById('txt_autoComplete').value;
 }
 
 function displayMatch(elem, index){
-  var value = document.getElementById('txt_autoComplete').value;
   // if(elem.match(/value\w+/g)){
   var regex = new RegExp(value, "gi");
   var match = elem.match(regex);
