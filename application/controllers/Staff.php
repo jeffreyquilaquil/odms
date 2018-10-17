@@ -208,9 +208,6 @@ class Staff extends My_Controller{
     }
     //
 
-//
-
-
     public function documents($type = 1){
       $data['type'] = $type;
       $data['content'] = 'documents';

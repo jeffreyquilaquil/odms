@@ -19,6 +19,12 @@
             <span class="nav-link-text">My Documents</span>
           </a>
         </li>
+        <li class="nav-item <?= ($tab=='sign'?'active-tab':'') ?>" data-toggle="tooltip" data-placement="right" title="To Be Signed">
+          <a class="nav-link" href="<?= $this->config->base_url(); ?>document/sign">
+            <i class="fa fa-fw fa-pencil"></i>
+            <span class="nav-link-text">Sign Documents</span>
+          </a>
+        </li>
         <li class="nav-item <?= ($tab=='profile'?'active-tab':'') ?>" data-toggle="tooltip" data-placement="right" title="Profile">
           <a class="nav-link" href="<?= $this->config->base_url() ?>staff/profile">
             <i class="fa fa-fw fa-user-circle"></i>

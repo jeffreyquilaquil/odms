@@ -73,5 +73,21 @@ class Document extends My_Controller{
     // Go back to addDocument form with the former data;
     $this->create($data);
   }
+
+  public function sign($type = 0){
+    $data['tab'] = 'sign';
+    $data['content'] = 'tobeSigned';
+    $data['type'] = $type;
+    $data['row'] = $this->dbmodel->getResultArray('tblsignatory s', 's.sigID AS "ID", s.signatureStatus, f.title AS "filename"', 's.signatory = '.$this->user->staffID.' AND s.signatureStatus = '.$type, 'LEFT JOIN tblfiles f ON s.fileID = f.fileID', 'f.created ASC');
+    $this->load->view('includes/template', $data);
+  }
+
+  public function applySignature($id = 0){
+    $data['tab'] = 'sign';
+    $data['content'] = 'applySignature';
+    $data['signatoryInfo'] = $this->dbmodel->getSingleResult('tblsignatory s', 's.sigID, f.title, a.username','sigID = '.$id, 'LEFT JOIN tblfiles f ON s.fileID = f.fileID LEFT JOIN tblaccount a ON f.authorID = a.staffID');
+
+    $this->load->view('includes/template', $data);
+  }
 }
 ?>
